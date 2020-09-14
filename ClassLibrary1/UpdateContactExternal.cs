@@ -24,11 +24,21 @@ namespace NHG.Plugins.DeveloperTest
             #endregion
 
             #region Return Calling Entity from context.InputParameters
-            
+
 
             #endregion
-            
 
+            // example XML
+            //<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+            //      <entity name='account'>
+            //        <attribute name='name' />
+            //        <attribute name='accountid' />
+            //        <order attribute='name' descending='false' />
+            //        <filter type='and'>
+            //          <condition attribute='name' operator='eq' value='Camden Council' />
+            //        </filter>
+            //      </entity>
+            //    </fetch>
         }
     }
 }

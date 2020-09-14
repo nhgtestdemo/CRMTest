@@ -8,54 +8,27 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NHGTestPlugin
+namespace NHG.Plugins.DeveloperTest
 {
-    public class Contact
-    {
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Email { get; set; }
-        public string PartyID { get; set; }
-    }
-
+ 
     public class UpdateContactExternal : IPlugin
     {
         public void Execute(IServiceProvider serviceProvider)
         {
+            #region Retrieve the execution context, organization service proxy and tracing service
+           IPluginExecutionContext context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
+           IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+           IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
+           ITracingService tracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
 
-            // Obtain the execution context from the service provider.
-            IPluginExecutionContext context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
+            #endregion
 
-            ITracingService tracingService =
-               (ITracingService)serviceProvider.GetService(typeof(ITracingService));
+            #region Return Calling Entity from context.InputParameters
+            
 
-            // Obtain the organization service reference.
-            IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
-            IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
+            #endregion
+            
 
-            try
-            {
-                // The InputParameters collection contains all the data passed in the message request.
-                if (context.InputParameters.Contains("Target") && context.InputParameters["Target"] is Entity)
-                {
-                    // Obtain the target entity from the input parameters.
-                   
-
-                   // Pass contact data to Azure function
-
-
-                   // Create task
-
-                }
-
-
-            }  // try end
-            catch (Exception ex)
-            {
-
-                throw new InvalidPluginExecutionException(ex.Message);
-
-            }
         }
     }
 }
